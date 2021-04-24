@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/app/areas/collector/views/collector_left_nav.dart';
+import 'package:flutter_application_1/app/areas/preposto/views/preposto_left_nav.dart';
 import 'package:flutter_application_1/app/components/alerta_dialog.dart';
-import 'package:flutter_application_1/app/models/insuranceCompany.dart';
-import 'package:flutter_application_1/app/models/sale.dart';
-import 'package:flutter_application_1/app/models/user.dart';
-import 'package:flutter_application_1/app/repository/SalesProvider.dart';
-import 'package:flutter_application_1/app/repository/UserProvider.dart';
-import 'package:flutter_application_1/app/repository/UserState.dart';
+import 'package:flutter_application_1/app/models/seguradora.dart';
+import 'package:flutter_application_1/app/models/venda.dart';
+import 'package:flutter_application_1/app/models/usuario.dart';
+import 'package:flutter_application_1/app/repository/VendaProvider.dart';
+import 'package:flutter_application_1/app/repository/UsuarioProvider.dart';
+import 'package:flutter_application_1/app/repository/UsuarioState.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
-class CreateSales extends StatefulWidget {
+class CreateVenda extends StatefulWidget {
   @override
-  _CreateSalesState createState() => _CreateSalesState();
+  _CreateVendaState createState() => _CreateVendaState();
 }
 
-class _CreateSalesState extends State<CreateSales> {
-  UserProvider userDb = UserProvider();
-  SalesProvider salesDb = SalesProvider();
-  String name = '';
-  int brokerId;
-  int insuranceId;
-  num price = 0.00;
-  String createdDate = '';
-  List<User> brokerList = [];
-  UserState userState = UserState();
+class _CreateVendaState extends State<CreateVenda> {
+  UsuarioProvider userDb = UsuarioProvider();
+  VendaProvider salesDb = VendaProvider();
+  String nome = '';
+  int corretorId;
+  int seguradoraId;
+  num preco = 0.00;
+  String dataDaVenda = '';
+  List<Usuario> listaCorretores = [];
+  UsuarioState userState = UsuarioState();
   TextEditingController createdDateController = TextEditingController();
   MoneyMaskedTextController priceController = MoneyMaskedTextController(decimalSeparator: ',', thousandSeparator: '.', leftSymbol: 'R\$');
 
@@ -33,13 +33,13 @@ class _CreateSalesState extends State<CreateSales> {
   void initState() {
     super.initState();
     getBrokers().then((value) {
-      brokerList = value;
+      listaCorretores = value;
     });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: CollectorLeftNav(),
+        drawer: PrepostoLeftNav(),
         appBar: AppBar(title: Text('Adicionar uma nova venda')),
         body: Container(
             child: ListView(children: [
@@ -53,7 +53,7 @@ class _CreateSalesState extends State<CreateSales> {
                   SizedBox(height: 10),
                   TextField(
                     onChanged: (text) {
-                      name = text;
+                      nome = text;
                     },
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
@@ -84,28 +84,28 @@ class _CreateSalesState extends State<CreateSales> {
                   //     }),
                   DropdownButton<int>(
                       hint: Text("Selecione o Corretor"),
-                      items: brokerList
-                          .map((broker) {
+                      items: listaCorretores
+                          .map((corretor) {
                         return DropdownMenuItem<int>(
-                            value: broker.id, child: Text("${broker.name} (${broker.email})"));
+                            value: corretor.id, child: Text("${corretor.nome} (${corretor.email})"));
                       }).toList(),
-                      value: brokerId,
+                      value: corretorId,
                       onChanged: (id) {
                         setState(() {
-                          brokerId = id;
+                          corretorId = id;
                         });
                       }),
                   DropdownButton<int>(
                       hint: Text("Selecione a Seguradora"),
-                      items: InsuranceCompany.getInsuranceCompanies()
-                          .map((insurance) {
+                      items: Seguradora.getListaSeguradoras()
+                          .map((seguradora) {
                         return DropdownMenuItem<int>(
-                            value: insurance.id, child: Text(insurance.name));
+                            value: seguradora.id, child: Text(seguradora.nome));
                       }).toList(),
-                      value: insuranceId,
+                      value: seguradoraId,
                       onChanged: (id) {
                         setState(() {
-                          insuranceId = id;
+                          seguradoraId = id;
                         });
                       }),
                   TextFormField(
@@ -124,7 +124,7 @@ class _CreateSalesState extends State<CreateSales> {
                           firstDate: DateTime(2020),
                           lastDate: DateTime(2100));
                       if (date != null) { 
-                        createdDate = myFormat.format(date);
+                        dataDaVenda = myFormat.format(date);
                         createdDateController.text = myFormat.format(date);  
                       }
                     },
@@ -134,7 +134,7 @@ class _CreateSalesState extends State<CreateSales> {
                     controller: priceController,
                     onChanged: (text) {
                       print(priceController.numberValue);
-                      price = double.tryParse(priceController.numberValue.toString());
+                      preco = double.tryParse(priceController.numberValue.toString());
                     },
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -144,15 +144,15 @@ class _CreateSalesState extends State<CreateSales> {
                   SizedBox(height: 15),
                   RaisedButton(
                     onPressed: () {
-                      if (name != '') {
-                        if (brokerId != 0) {
-                          if (insuranceId != 0) {
-                            if (price != null && price > 0.00) {
-                              saveCadastro(name, brokerId, insuranceId,
-                                  createdDate, price);
+                      if (nome != '') {
+                        if (corretorId != 0) {
+                          if (seguradoraId != 0) {
+                            if (preco != null && preco > 0.00) {
+                              saveCadastro(nome, seguradoraId, corretorId,
+                                  dataDaVenda, preco);
                               showDialogWithAlert(context,
                                   'Venda cadastrada com sucesso.', 'OK', () {
-                                Navigator.of(context).pushReplacementNamed('/sales/add');
+                                Navigator.of(context).pushReplacementNamed('/venda/add');
                               });
                             } else {
                               showDialogWithAlert(
@@ -201,20 +201,20 @@ class _CreateSalesState extends State<CreateSales> {
         });
   }
 
-  void saveCadastro(String name, int brokerId, int insuranceId,
-      String createdDate, num price) async {
-    userState = await userState.getUserState();
-    await salesDb.insert(Sale.fromMap({
-      'name': name,
-      'collectorId': userState.userId,
-      'brokerId': brokerId,
-      'insuranceId': insuranceId,
-      'price': price,
-      'createdDate': createdDate
+  void saveCadastro(String nome, int corretorId, int seguradoraId,
+      String dataDaVenda, num preco) async {
+    userState = await userState.getUsuarioState();
+    await salesDb.insert(Venda.fromMap({
+      'nome': nome,
+      'prepostoId': userState.id,
+      'corretorId': corretorId,
+      'seguradoraId': seguradoraId,
+      'preco': preco,
+      'dataDaVenda': dataDaVenda
     }));
   }
 
-  Future<List<User>> getBrokers() async {
+  Future<List<Usuario>> getBrokers() async {
     return await userDb.getBySusep(true);
   }
 }

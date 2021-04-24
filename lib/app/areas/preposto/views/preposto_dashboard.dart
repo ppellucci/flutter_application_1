@@ -4,13 +4,13 @@ import 'package:flutter_application_1/app/areas/preposto/views/preposto_left_nav
 import 'package:flutter_application_1/app/repository/VendaProvider.dart';
 import 'package:flutter_application_1/app/repository/UsuarioState.dart';
 
-class CollectorDashboard extends StatelessWidget {
+class PrepostoDashboard extends StatelessWidget {
   final VendaProvider salesDb = VendaProvider();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CollectorLeftNav(),
+      drawer: PrepostoLeftNav(),
       appBar: AppBar(title: Text('Preposto')),
       body: Container(
           padding: const EdgeInsets.all(20.0),

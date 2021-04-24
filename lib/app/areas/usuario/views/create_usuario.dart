@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/components/alerta_dialog.dart';
-import 'package:flutter_application_1/app/models/user.dart';
-import 'package:flutter_application_1/app/repository/UserProvider.dart';
+import 'package:flutter_application_1/app/models/usuario.dart';
+import 'package:flutter_application_1/app/repository/UsuarioProvider.dart';
 
-class CreateUser extends StatefulWidget {
+class CreateUsuario extends StatefulWidget {
   @override
   _CreateUsuarioState createState() => _CreateUsuarioState();
 }
 
-class _CreateUsuarioState extends State<CreateUsuarioState> {
+class _CreateUsuarioState extends State<CreateUsuario> {
   UsuarioProvider data = UsuarioProvider();
   bool isBroker = false;
   String email = '';
-  String name = '';
-  String password = '';
+  String nome = '';
+  String senha = '';
   String susep = '';
 
   @override
@@ -32,7 +32,7 @@ class _CreateUsuarioState extends State<CreateUsuarioState> {
               SizedBox(height: 10),
               TextField(
                 onChanged: (text) {
-                  name = text;
+                  nome = text;
                 },
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
@@ -50,26 +50,35 @@ class _CreateUsuarioState extends State<CreateUsuarioState> {
               SizedBox(height: 15),
               TextField(
                 onChanged: (text) {
-                  password = text;
+                  senha = text;
                 },
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                     labelText: 'Senha', border: OutlineInputBorder()),
               ),
               SizedBox(height: 15),
-              CheckboxListTile(
-                title: Text("Sou um corretor"),
-                controlAffinity: ListTileControlAffinity.leading,
-                value: isBroker,
-                onChanged: (bool newValue) {
-                  setState(() {
-                    isBroker = newValue;
-                  });
-                },
-              ),
-              Visibility(
-                visible: isBroker,
-                child: TextField(
+              // CheckboxListTile(
+              //   title: Text("Sou um corretor"),
+              //   controlAffinity: ListTileControlAffinity.leading,
+              //   value: isBroker,
+              //   onChanged: (bool newValue) {
+              //     setState(() {
+              //       isBroker = newValue;
+              //     });
+              //   },
+              // ),
+              // Visibility(
+              //   visible: isBroker,
+              //   child: TextField(
+              //     onChanged: (text) {
+              //       susep = text;
+              //     },
+              //     keyboardType: TextInputType.text,
+              //     decoration: InputDecoration(
+              //         labelText: 'SUSEP', border: OutlineInputBorder()),
+              //   ),
+              // ),
+              TextField(
                   onChanged: (text) {
                     susep = text;
                   },
@@ -77,15 +86,14 @@ class _CreateUsuarioState extends State<CreateUsuarioState> {
                   decoration: InputDecoration(
                       labelText: 'SUSEP', border: OutlineInputBorder()),
                 ),
-              ),
               SizedBox(height: 15),
               RaisedButton(
                 onPressed: () {
-                  if (name != '') {
+                  if (nome != '') {
                     if (!isBroker || (isBroker && susep != '')) {
                       if (email != '') {
-                        if (password != '') {
-                          saveCadastro(name, email, password, susep);
+                        if (senha != '') {
+                          saveCadastro(nome, email, senha, susep);
                           showDialogWithAlert(
                               context, 'Cadastro efetuado com sucesso.', 'OK',
                               () {
@@ -139,8 +147,8 @@ class _CreateUsuarioState extends State<CreateUsuarioState> {
   }
 
   void saveCadastro(
-      String name, String email, String password, String susep) async {
+      String nome, String email, String senha, String susep) async {
     await data.insert(Usuario.fromMap(
-        {'name': name, 'email': email, 'password': password, 'susep': susep}));
+        {'nome': nome, 'email': email, 'senha': senha, 'susep': susep}));
   }
 }

@@ -4,6 +4,7 @@ class DbProvider {
   String dbName = 'sistema.db';
   String vendaTable = 'Sales';
   String usuarioTable = 'Usuario';
+  String seguradoraCorretorTable = 'SeguradoraCorretor';
   Database db;
 
   Future<void> close() async {
@@ -28,6 +29,12 @@ class DbProvider {
   seguradoraId INT,
   preco REAL,
   dataDaVenda TEXT
+)''');
+
+await db.execute('''CREATE TABLE $seguradoraCorretorTable (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  corretorId INT,
+  seguradoraId INT
 )''');
 
 

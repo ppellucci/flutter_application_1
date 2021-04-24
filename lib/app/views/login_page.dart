@@ -51,10 +51,10 @@ class _LoginPageState extends State<LoginPage> {
                     if (result != null) {
                       saveLoginState(result);
                       if (result.susep == '') {
-                        Navigator.of(context).pushReplacementNamed('/collector/home');
+                        Navigator.of(context).pushReplacementNamed('/preposto/home');
                       }
                       else {
-                        Navigator.of(context).pushReplacementNamed('/broker/home');
+                        Navigator.of(context).pushReplacementNamed('/corretor/home');
                       }
                     } else {
                       showDialog(
