@@ -68,10 +68,16 @@ class CorretorLeftNav extends StatelessWidget {
         // ),
         ListTile(
           title: Text('Minhas Seguradoras'),
-          // subtitle: Text('0'),
           leading: Icon(Icons.account_balance),
           onTap: () {
             Navigator.of(context).pushReplacementNamed('/seguradora/addcorretor');
+          },
+        ),
+        ListTile(
+          title: Text('Minhas Métricas'),
+          leading: Icon(Icons.addchart),
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed('/corretor/metrica');
           },
         ),
         // ListTile(

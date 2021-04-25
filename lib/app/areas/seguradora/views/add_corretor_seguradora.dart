@@ -85,7 +85,7 @@ class _AddSeguradoraCorretorState extends State<AddSeguradoraCorretor> {
                         child: ListView.builder(
                             itemCount: minhasSeguradoras.length,
                             itemBuilder: (context, index) {
-                              return new Text(minhasSeguradoras[index].nome);
+                              return new Text(minhasSeguradoras[index].nome, style: TextStyle(fontWeight: FontWeight.bold));
                             }))
                   ]))),
         ));

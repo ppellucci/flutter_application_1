@@ -5,6 +5,7 @@ class DbProvider {
   String vendaTable = 'Sales';
   String usuarioTable = 'Usuario';
   String seguradoraCorretorTable = 'SeguradoraCorretor';
+  String metricaTable = 'Metrica';
   Database db;
 
   Future<void> close() async {
@@ -37,6 +38,13 @@ await db.execute('''CREATE TABLE $seguradoraCorretorTable (
   seguradoraId INT
 )''');
 
+await db.execute('''CREATE TABLE $metricaTable (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  corretorId INT,
+  seguradoraId INT,
+  valorPlano REAL,
+  quantidadeVendido INT
+)''');
 
     });
   }

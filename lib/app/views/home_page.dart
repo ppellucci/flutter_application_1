@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/areas/corretor/views/add_metrica.dart';
 import 'package:flutter_application_1/app/areas/corretor/views/corretor_dashboard.dart';
 import 'package:flutter_application_1/app/areas/preposto/views/preposto_dashboard.dart';
 import 'package:flutter_application_1/app/areas/seguradora/views/add_corretor_seguradora.dart';
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
         '/preposto/home': (context) => PrepostoDashboard(),
         '/usuario/create': (context) => CreateUsuario(),
         '/corretor/home': (context) => CorretorDashboard(),
+        '/corretor/metrica': (context) => AddMetrica(),
         '/venda/add': (context) => CreateVenda(),
         '/seguradora/addcorretor': (context) => AddSeguradoraCorretor()
       },
