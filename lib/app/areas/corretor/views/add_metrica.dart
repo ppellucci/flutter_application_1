@@ -3,7 +3,6 @@ import 'package:flutter_application_1/app/areas/corretor/views/corretor_left_nav
 import 'package:flutter_application_1/app/components/alerta_dialog.dart';
 import 'package:flutter_application_1/app/models/metrica.dart';
 import 'package:flutter_application_1/app/models/seguradora.dart';
-import 'package:flutter_application_1/app/models/seguradoraCorretor.dart';
 import 'package:flutter_application_1/app/repository/MetricaProvider.dart';
 import 'package:flutter_application_1/app/repository/SeguradoraCorretorProvider.dart';
 import 'package:flutter_application_1/app/repository/UsuarioState.dart';

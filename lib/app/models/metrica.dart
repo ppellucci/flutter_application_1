@@ -1,30 +1,11 @@
+import 'package:flutter_application_1/app/models/metricaAngariacao.dart';
+import 'package:flutter_application_1/app/models/metricaBonus.dart';
+import 'package:flutter_application_1/app/models/metricaComissao.dart';
+
 class Metrica {
-  int id;
-  int corretorId;
   int seguradoraId;
-  num valorPlano;
-  int quantidadeVendido;
-
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      'corretorId': corretorId,
-      'seguradoraId': seguradoraId,
-      'valorPlano': valorPlano,
-      'quantidadeVendido': quantidadeVendido
-    };
-    if (id != null) {
-      map['id'] = id;
-    }
-    return map;
-  }
-
-  Metrica();
-
-  Metrica.fromMap(Map<dynamic, dynamic> map) {
-    id = map['id'];
-    corretorId = map['corretorId'];
-    seguradoraId = map['seguradoraId'];
-    valorPlano = map['valorPlano'];
-    quantidadeVendido = map['quantidadeVendido'];
-  }
+  int corretorId;
+  MetricaAngariacao angariacao;
+  List<MetricaComissao> comissoes;
+  List<MetricaBonus> bonus;
 }

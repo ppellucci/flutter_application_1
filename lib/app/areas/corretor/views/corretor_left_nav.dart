@@ -80,6 +80,13 @@ class CorretorLeftNav extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed('/corretor/metrica');
           },
         ),
+        ListTile(
+          title: Text('Minhas Parametrizações'),
+          leading: Icon(Icons.monetization_on),
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed('/corretor/parametrizacao');
+          },
+        ),
         // ListTile(
         //   title: Text('Relatórios'),
         //   subtitle: Text('1'),
