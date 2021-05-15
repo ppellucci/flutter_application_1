@@ -37,8 +37,8 @@ class MetricaProvider extends DbProvider {
       await open();
     }
 
-    List<Map> maps = await db.query(metricaComissaoTable,
-        columns: ['id', 'corretorId', 'percentual', 'qtdMeses']);
+    List<Map> maps = await db.query(metricaBonusTable,
+        columns: ['id', 'corretorId', 'porcentagem', 'qtdMeses']);
 
     List<MetricaBonus> records =
         maps.map((e) => MetricaBonus.fromMap(e)).toList();
@@ -87,20 +87,18 @@ class MetricaProvider extends DbProvider {
     return comissoes;
   }
 
-  Future<List<MetricaBonus>> getBonusByCorretorAndSeguradora(
+  Future<MetricaBonus> getBonusByCorretorAndSeguradora(
       int corretorId, int seguradoraId) async {
         if (db == null) {
       await open();
     }
-    List<MetricaBonus> bonus = new List<MetricaBonus>();
-    var query = await db.query(metricaComissaoTable,
-        columns: ['id', 'corretorId', 'seguradoraId', 'percentual', 'qtdMeses'],
+    MetricaBonus bonus = new MetricaBonus();
+    var query = await db.query(metricaBonusTable,
+        columns: ['id', 'corretorId', 'seguradoraId', 'porcentagem', 'qtdMeses'],
         where: "corretorId = ? and seguradoraId = ?",
         whereArgs: [corretorId, seguradoraId]);
     if (query.length > 0) {
-      for (var i = 0; i < query.length; i++) {
-        bonus.add(new MetricaBonus.fromMap(query[i]));
-      }
+      bonus = MetricaBonus.fromMap(query.first);
     }
     return bonus;
   }
@@ -158,7 +156,7 @@ class MetricaProvider extends DbProvider {
       await open();
     }
 
-    bonus.id = await db.insert(metricaAngariacaoTable, bonus.toMap());
+    bonus.id = await db.insert(metricaBonusTable, bonus.toMap());
     return bonus;
   }
 }

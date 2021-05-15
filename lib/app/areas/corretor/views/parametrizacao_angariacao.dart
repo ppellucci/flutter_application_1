@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/areas/corretor/views/add_parametrizacao.dart';
 import 'package:flutter_application_1/app/components/alerta_dialog.dart';
 import 'package:flutter_application_1/app/repository/UsuarioState.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';

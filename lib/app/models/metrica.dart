@@ -7,5 +7,5 @@ class Metrica {
   int corretorId;
   MetricaAngariacao angariacao;
   List<MetricaComissao> comissoes;
-  List<MetricaBonus> bonus;
+  MetricaBonus bonus;
 }

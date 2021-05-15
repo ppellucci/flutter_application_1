@@ -60,7 +60,8 @@ await db.execute('''CREATE TABLE $metricaBonusTable (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   corretorId INT,
   seguradoraId INT,
-  percentualComissao REAL
+  porcentagem REAL,
+  qtdMeses INT
 )''');
 
     });

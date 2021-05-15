@@ -32,17 +32,17 @@ class _AddParametrizacaoState extends State<AddParametrizacao> {
   void initState() {
     super.initState();
 
-    getMinhasSeguradoras().then((value) {
-      setState(() {
-        minhasSeguradoras = value;
-      });
-    });
+    // getMinhasSeguradoras().then((value) {
+    //   setState(() {
+    //     minhasSeguradoras = value;
+    //   });
+    // });
 
-    getMinhasMetricas().then((value) {
-      setState(() {
-        minhasMetricas = value;
-      });
-    });
+    // getMinhasMetricas().then((value) {
+    //   setState(() {
+    //     minhasMetricas = value;
+    //   });
+    // });
   }
 
   Widget build(BuildContext context) {
@@ -163,25 +163,25 @@ class _AddParametrizacaoState extends State<AddParametrizacao> {
         });
   }
 
-  void addMetrica(int seguradoraId, num preco, int qtdVendido) async {
-    usuarioState = await usuarioState.getUsuarioState();
-    await dbMetrica.insert(Metrica.fromMap({
-      'corretorId': usuarioState.id,
-      'seguradoraId': seguradoraId,
-      'valorPlano': preco,
-      'quantidadeVendido': qtdVendido
-    }));
-  }
+  // void addMetrica(int seguradoraId, num preco, int qtdVendido) async {
+  //   usuarioState = await usuarioState.getUsuarioState();
+  //   await dbMetrica.insert(Metrica.fromMap({
+  //     'corretorId': usuarioState.id,
+  //     'seguradoraId': seguradoraId,
+  //     'valorPlano': preco,
+  //     'quantidadeVendido': qtdVendido
+  //   }));
+  // }
 
-  Future<List<Seguradora>> getMinhasSeguradoras() async {
-    usuarioState = await usuarioState.getUsuarioState();
-    return await dbSeguradoraCorretorProvider.getByCorretor(usuarioState.id);
-  }
+  // Future<List<Seguradora>> getMinhasSeguradoras() async {
+  //   usuarioState = await usuarioState.getUsuarioState();
+  //   return await dbSeguradoraCorretorProvider.getByCorretor(usuarioState.id);
+  // }
 
-  Future<List<Metrica>> getMinhasMetricas() async {
-    usuarioState = await usuarioState.getUsuarioState();
-    return await dbMetrica.getByCorretor(usuarioState.id);
-  }
+  // Future<List<Metrica>> getMinhasMetricas() async {
+  //   usuarioState = await usuarioState.getUsuarioState();
+  //   return await dbMetrica.getByCorretor(usuarioState.id);
+  // }
 
   String getNomeSeguradoraById(int id) {
     return minhasSeguradoras.singleWhere((s) => s.id == id).nome;
