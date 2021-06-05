@@ -2,15 +2,19 @@ class ParametrizacaoComissao {
   int id;
   int corretorId;
   int seguradoraId;
-  num porcentagemComissao;
-  int quantidade;
+  int metricaId;
+  num porcentagemComissaoBase;
+  num valorMin;
+  num valorMax;
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'corretorId': corretorId,
       'seguradoraId': seguradoraId,
-      'porcentagemComissao': porcentagemComissao,
-      'quantidade': quantidade
+      'metricaId': metricaId,
+      'porcentagemComissaoBase': porcentagemComissaoBase,
+      'valorMin': valorMin,
+      'valorMax': valorMax
     };
     if (id != null) {
       map['id'] = id;
@@ -24,7 +28,9 @@ class ParametrizacaoComissao {
     id = map['id'];
     corretorId = map['corretorId'];
     seguradoraId = map['seguradoraId'];
-    porcentagemComissao = map['porcentagemComissao'];
-    quantidade = map['quantidade'];
+    metricaId = map['metricaId'];
+    porcentagemComissaoBase = map['porcentagemComissaoBase'];
+    valorMin = map['valorMin'];
+    valorMax = map['valorMax'];
   }
 }

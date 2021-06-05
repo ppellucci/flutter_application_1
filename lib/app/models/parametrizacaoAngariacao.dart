@@ -1,15 +1,15 @@
-class ParametrizacaoAngaricao {
+class ParametrizacaoAngariacao {
   int id;
   int corretorId;
   int seguradoraId;
-  num percentualAngariacao;
+  int metricaId;
   int quantidade;
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'corretorId': corretorId,
       'seguradoraId': seguradoraId,
-      'percentualAngariacao': percentualAngariacao,
+      'metricaId': metricaId,
       'quantidade': quantidade
     };
     if (id != null) {
@@ -18,13 +18,13 @@ class ParametrizacaoAngaricao {
     return map;
   }
 
-  ParametrizacaoAngaricao();
+  ParametrizacaoAngariacao();
 
-  ParametrizacaoAngaricao.fromMap(Map<dynamic, dynamic> map) {
+  ParametrizacaoAngariacao.fromMap(Map<dynamic, dynamic> map) {
     id = map['id'];
     corretorId = map['corretorId'];
     seguradoraId = map['seguradoraId'];
-    percentualAngariacao = map['percentualAngariacao'];
+    metricaId = map['metricaId'];
     quantidade = map['quantidade'];
   }
 }

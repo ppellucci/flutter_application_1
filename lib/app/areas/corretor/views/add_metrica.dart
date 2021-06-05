@@ -84,23 +84,19 @@ class _AddMetricaState extends State<AddMetrica> {
         minhasSeguradoras = value;
       });
     });
-
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: CorretorLeftNav(),
-        appBar: AppBar(title: Text('Adicionar minhas métricas')),
-        body: Container(
+      drawer: CorretorLeftNav(),
+      appBar: AppBar(title: Text('Adicionar minhas métricas')),
+      body: Container(
           child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
               child: SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
-                  child: 
-                  Expanded(
-                    child: 
-                  Column(children: [
+                  child: Column(children: [
                     SizedBox(height: 10),
                     DropdownButton<int>(
                         hint: Text("Selecione a Seguradora"),
@@ -134,14 +130,12 @@ class _AddMetricaState extends State<AddMetrica> {
                       ),
                       SizedBox(height: 15),
                       Text('Comissão'),
-                      Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: cards.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return cards[index];
-                          },
-                        ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: cards.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return cards[index];
+                        },
                       ),
                       RaisedButton(
                         child: Text('Nova comissão'),
@@ -208,7 +202,7 @@ class _AddMetricaState extends State<AddMetrica> {
                     //           ]);
                     //         }))
                   ])))),
-        ));
+    );
   }
 
   Future showDialogWithAlert(BuildContext context, String text,
@@ -263,7 +257,8 @@ class _AddMetricaState extends State<AddMetrica> {
 
   void getMetricaPorSeguradora() async {
     usuarioState = await usuarioState.getUsuarioState();
-    Metrica metrica = await dbMetrica.getByCorretorAndSeguradora(usuarioState.id, seguradoraId);
+    Metrica metrica = await dbMetrica.getByCorretorAndSeguradora(
+        usuarioState.id, seguradoraId);
     if (metrica != null) {
       if (metrica.angariacao != null && metrica.angariacao.porcentagem != 0) {
         // pctAngariacaoController.numberValue = metrica.angariacao.porcentagem;

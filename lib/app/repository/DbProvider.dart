@@ -8,6 +8,9 @@ class DbProvider {
   String metricaAngariacaoTable = 'MetricaAngariacao';
   String metricaComissaoTable = 'MetricaComissao';
   String metricaBonusTable = 'MetricaBonus';
+  String parametrizacaoAngariacaoTable = 'ParametrizacaoAngariacao';
+  String parametrizacaoComissaoTable = 'ParametrizacaoComissao';
+  String parametrizacaoBonusTable = 'ParametrizacaoBonus';
   Database db;
 
   Future<void> close() async {
@@ -17,6 +20,9 @@ class DbProvider {
   Future<void> open() async {
     db = await openDatabase(dbName, version: 1,
         onCreate: (Database db, int version) async {
+
+/* Usuario */
+
       await db.execute('''CREATE TABLE $usuarioTable (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome TEXT,
@@ -34,12 +40,14 @@ class DbProvider {
   dataDaVenda TEXT
 )''');
 
+/* SeguradoraCorretor */
 await db.execute('''CREATE TABLE $seguradoraCorretorTable (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   corretorId INT,
   seguradoraId INT
 )''');
 
+/* Metrica */
 await db.execute('''CREATE TABLE $metricaAngariacaoTable (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   corretorId INT,
@@ -62,6 +70,35 @@ await db.execute('''CREATE TABLE $metricaBonusTable (
   seguradoraId INT,
   porcentagem REAL,
   qtdMeses INT
+)''');
+
+/* Parametrizacao */
+await db.execute('''CREATE TABLE $parametrizacaoAngariacaoTable (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  corretorId INT,
+  seguradoraId INT,
+  metricaId INT,
+  quantidade INT
+)''');
+
+await db.execute('''CREATE TABLE $parametrizacaoComissaoTable (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  corretorId INT,
+  seguradoraId INT,
+  metricaId INT,
+  porcentagemComissaoBase REAL,
+  valorMin REAL,
+  valorMax REAL
+)''');
+
+await db.execute('''CREATE TABLE $parametrizacaoBonusTable (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  corretorId INT,
+  seguradoraId INT,
+  metricaId INT,
+  porcentagemComissao REAL,
+  valorMin REAL,
+  valorMax REAL
 )''');
 
     });
